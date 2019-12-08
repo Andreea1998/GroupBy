@@ -10,7 +10,7 @@ namespace Facebook.Models
 	{
 		[Key]
 		public int photoID { get; set; }
-		[Required]
+		[Required(ErrorMessage = "Please add an URL for your photo")]
 		public string photoURL { get; set; }
 		public int nrOfLikes { get; set; }
 
