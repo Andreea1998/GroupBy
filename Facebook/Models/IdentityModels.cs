@@ -13,9 +13,9 @@ namespace Facebook.Models
 	// You can add profile data for the user by adding more properties to your ApplicationUser class, please visit https://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
 	public class ApplicationUser : IdentityUser
 	{
-	
+
 		public int profileID { get; set; }
-		public virtual Profile profile { get; set; } 
+		//public virtual Profile profile { get; set; } 
 
 		public virtual ICollection<Album> albums { get; set; }
 		public virtual ICollection<Comment> comments { get; set; }

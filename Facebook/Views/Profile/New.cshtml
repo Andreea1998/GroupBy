@@ -1,7 +1,32 @@
-﻿
+﻿@model Facebook.Models.Profile
+
 @{
-    ViewBag.Title = "New";
+				/**/
+
+				ViewBag.Title = "New";
 }
 
-<h2>New</h2>
+@using (Html.BeginForm(actionName: "New", controllerName: "Profile"))
+{
 
+	@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+	@Html.HiddenFor(m => m.userId)
+
+	<div class="form-group">
+		@Html.Label("profileImageUrl", "Choose a profile picture")
+		@Html.TextBox("profileImageUrl", null, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.profileImageUrl, "", new { @class = "text-danger" })
+	</div>
+	<div class="form-group">
+		@Html.Label("name", "What's your name?")
+		@Html.TextBox("name", null, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.name, "", new { @class = "text-danger" })
+	</div>
+	<div class="form-group">
+		@Html.Label("about", "Tell us something about you")
+		@Html.TextArea("about", null, new { @class = "form-control" })
+		@Html.ValidationMessageFor(m => m.about, "", new { @class = "text-danger" })
+	</div>
+	<button type="submit" class="btn btn-primary">Submit</button>
+}
