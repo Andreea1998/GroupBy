@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* Logo img.. needes repositioning and resizing*/
+.logo-header >img {
+	height: 50px;
+	width: 100px;
+}
+
