@@ -48,7 +48,8 @@ namespace Facebook.Controllers
 		public ActionResult New()
 		{
 			Profile profile = new Profile();
-			profile.userId = User.Identity.GetUserId();
+			//ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
+			profile.userId = User.Identity.GetUserId(); 
 			return View(profile);
 		}
 
