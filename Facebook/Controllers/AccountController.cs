@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Facebook.Models;
+using System.Diagnostics;
 
 namespace Facebook.Controllers
 {
@@ -79,8 +80,12 @@ namespace Facebook.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+				{
 					//return RedirectToLocal(returnUrl);
-					return RedirectToAction("Show", "Profile", new { id = User.Identity.GetUserId() });
+					string userId = SignInManager.AuthenticationManager.AuthenticationResponseGrant.Identity.GetUserId();
+					Debug.WriteLine("USER ID "+ userId);
+					return RedirectToAction("Show", "Profile", new { id = userId });
+				}		
 				case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
