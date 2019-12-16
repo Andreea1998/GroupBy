@@ -252,6 +252,8 @@
     <Content Include="Views\Profile\Delete.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Album\New.cshtml" />
+    <Content Include="Views\Photo\Index.cshtml" />
+    <Content Include="Views\Photo\New.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -259,7 +261,6 @@
     <Folder Include="Views\Comment\" />
     <Folder Include="Views\Group\" />
     <Folder Include="Views\Message\" />
-    <Folder Include="Views\Photo\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

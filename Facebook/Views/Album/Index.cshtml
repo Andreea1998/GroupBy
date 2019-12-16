@@ -21,7 +21,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+           @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
         </td>
     
         <td>

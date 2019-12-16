@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -15,7 +16,7 @@ namespace Facebook.Models
 		public int nrOfLikes { get; set; }
 
 		public int albumID { get; set; }
-		[Required]
+		[ForeignKey("albumID")]
 		public virtual Album album { get; set; }
 
 		public virtual ICollection<Comment> comments { get; set; }

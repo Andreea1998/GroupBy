@@ -19,11 +19,11 @@ namespace Facebook.Controllers
 		public ActionResult Index(string id)
 		{
 			ApplicationUser user = db.Users.Find(id);
-			//NEEDS WORK
 			IEnumerable<Album> albums = db.Albums.Where(m => m.userId == id).ToList();
+			//Might not need 
 			ViewBag.Albums = albums;
 			ViewBag.userId = id;
-			Debug.WriteLine(albums);
+			//
 			return View(albums);
 		}
 
@@ -65,5 +65,6 @@ namespace Facebook.Controllers
 				return View(album);
 			}
 		}
+
     }
 }
