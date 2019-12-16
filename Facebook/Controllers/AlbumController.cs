@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,9 +20,10 @@ namespace Facebook.Controllers
 		{
 			ApplicationUser user = db.Users.Find(id);
 			//NEEDS WORK
-			IEnumerable<Album> albums = db.Albums.Where(m => m.user.Id == id).ToList();
+			IEnumerable<Album> albums = db.Albums.Where(m => m.userId == id).ToList();
 			ViewBag.Albums = albums;
 			ViewBag.userId = id;
+			Debug.WriteLine(albums);
 			return View(albums);
 		}
 
@@ -30,6 +32,7 @@ namespace Facebook.Controllers
 			ApplicationUser user = db.Users.Find(id);
 			Album album = new Album();
 			album.user = user;
+			album.userId = id;
 			return View(album);
 		}
 

@@ -103,7 +103,6 @@ D:\My Stuff\Anul 3\ProjectDaw\GroupBy-master\Facebook\obj\Debug\GroupBy.csproj.C
 D:\My Stuff\Anul 3\ProjectDaw\GroupBy-master\Facebook\obj\Debug\GroupBy.csproj.CopyComplete
 D:\My Stuff\Anul 3\ProjectDaw\GroupBy-master\Facebook\obj\Debug\Facebook.dll
 D:\My Stuff\Anul 3\ProjectDaw\GroupBy-master\Facebook\obj\Debug\Facebook.pdb
-C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\obj\Debug\GroupBy.csprojAssemblyReference.cache
 C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\obj\Debug\GroupBy.csproj.CoreCompileInputs.cache
 C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\obj\Debug\Facebook.dll
 C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\obj\Debug\Facebook.pdb
@@ -208,3 +207,4 @@ C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\bin\Microsoft.Owin.Security.Microso
 C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\obj\Debug\GroupBy.csproj.CopyComplete
+C:\Users\DC\Desktop\Proiect\GroupBy\Facebook\obj\Debug\GroupBy.csprojAssemblyReference.cache
