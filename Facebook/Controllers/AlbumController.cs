@@ -52,7 +52,7 @@ namespace Facebook.Controllers
 						user.albums.Add(album);
 						db.SaveChanges();
 					}
-					return RedirectToAction("Index", "Album", new { id = album.user.Id });
+					return RedirectToAction("Index", "Album", new { @id = album.userId });
 				}
 				else
 				{

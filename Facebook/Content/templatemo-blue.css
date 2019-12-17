@@ -68,9 +68,11 @@ header {
 }
 header img {
   display: inline-block !important;
-  width: 250px;
-  height: 400px;
-
+  
+}
+.profile-img {
+	width: 250px;
+	height: 250px;
 }
 header h2 {
   padding-top: 40px;
