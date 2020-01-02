@@ -11,7 +11,7 @@ namespace Facebook.Controllers
     {
 		private ApplicationDbContext db = new ApplicationDbContext();
 
-		// GET: Photo
+		//Get all photo with id as albumId
 		[Route("Index/{id}")]
 		public ActionResult Index(int id)
 		{
@@ -22,6 +22,7 @@ namespace Facebook.Controllers
 			return View(photos);
 		}
 
+		//Create new photo with id as albumId
 		public ActionResult New(int id)
 		{
 			Album album = db.Albums.Find(id);
@@ -52,6 +53,14 @@ namespace Facebook.Controllers
 			{
 				return View(photo);
 			}
+		}
+
+		
+		[HttpGet]
+		public ActionResult Show(int id)
+		{
+			Photo photo = db.Photos.Find(id);
+			return View(photo);
 		}
 	}
 }

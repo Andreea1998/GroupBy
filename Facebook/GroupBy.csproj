@@ -254,6 +254,7 @@
     <Content Include="Views\Album\New.cshtml" />
     <Content Include="Views\Photo\Index.cshtml" />
     <Content Include="Views\Photo\New.cshtml" />
+    <Content Include="Views\Photo\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
