@@ -1,7 +1,7 @@
-﻿@model Facebook.Models.Photo
+﻿@model Facebook.Models.PhotoWithComments
 
 @{
-    ViewBag.Title = "Show";
+	ViewBag.Title = "Show";
 }
 
 <h2>Show</h2>
@@ -9,5 +9,20 @@
 <div>
 	<h4>Photo</h4>
 	<hr />
-	<img class="img-fluid img-thumbnail" src="@Model.photoURL" alt="">
+	<img class="img-fluid img-thumbnail" src="@Model.photo.photoURL" alt="">
+	@foreach (var comment in Model.comments)
+	{
+		<h3>@comment.userName</h3>
+		<p>@comment.text</p>
+	}
+
+	@using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
+	{
+		@Html.Label("Add new comment")
+		@Html.Hidden("userID", (string)ViewBag.currentUser.ToString())
+		@Html.Hidden("photoID", Model.photo.photoID)
+		@Html.TextBox("text", null, new { @class = "form-control" })
+		<br />
+		<button class="btn btn-success" type="submit">Add</button>
+	}
 </div>

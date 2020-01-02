@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -13,13 +14,14 @@ namespace Facebook.Models
 		[Required]
 		public string text { get; set; }
 		public int nrOfLikes { get; set; }
+		public string userName { get; set; }
 
 		public string userID { get; set; }
-		[Required]
+		[ForeignKey("userID")]
 		public virtual ApplicationUser user { get; set; }
 
 		public int photoID { get; set; }
-		[Required]
+		[ForeignKey("photoID")]
 		public virtual Photo photo { get; set; }
 
 	}

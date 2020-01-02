@@ -1,4 +1,5 @@
 ﻿using Facebook.Models;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,7 +61,14 @@ namespace Facebook.Controllers
 		public ActionResult Show(int id)
 		{
 			Photo photo = db.Photos.Find(id);
-			return View(photo);
+			IEnumerable<Comment> comments = db.Comments.Where(m => m.photoID == id).ToList();
+			PhotoWithComments photoWithComments = new PhotoWithComments();
+			photoWithComments.photo = photo;
+			photoWithComments.comments = comments;
+
+			ViewBag.currentUser = User.Identity.GetUserId();
+
+			return View(photoWithComments);
 		}
 	}
 }
