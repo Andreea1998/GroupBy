@@ -21,13 +21,18 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-           @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
+            @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
         </td>
-    
+
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.albumID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.albumID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.albumID })
+            @using (Html.BeginForm(actionName: "Edit", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
+            {
+                @Html.ActionLink("Edit", "Edit")
+            }|
+            @using (Html.BeginForm(actionName: "Delete", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
+            {
+                @Html.ActionLink("Delete", "Delete" )
+            }
         </td>
     </tr>
 }
