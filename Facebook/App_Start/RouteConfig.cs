@@ -19,7 +19,12 @@ namespace Facebook
 				"Comment/Delete/{commentId}/{photoId}",                           // URL with parameters
 				new { controller = "Comment", action = "Delete", commentId=UrlParameter.Optional, photoId = UrlParameter.Optional }  // Parameter defaults
 			);
-			
+			routes.MapRoute(
+				"Search",                                              
+				"Search/Search/{searchText}",                          
+				new { controller = "Search", action = "Search", searchText = UrlParameter.Optional } 
+			);
+
 
 			routes.MapRoute(
 				name: "Default",

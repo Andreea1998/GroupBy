@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Facebook.Models.Search>
+
+<ul>
+@foreach(var searchResult in Model)
+{
+	//Should add image too
+	<li>
+	@Html.ActionLink(searchResult.profile.name,"Show", "Profile", new { @id = searchResult.user.Id },null);
+	<p>@searchResult.profile.about</p>
+	</li>
+}
+</ul>
+
+
+
