@@ -128,10 +128,18 @@ namespace Facebook.Controllers
                     if (TryUpdateModel(profile))
                     {
                         profile.profileImageUrl = requestProfile.profileImageUrl;
+                        profile.backgroundImageUrl = requestProfile.backgroundImageUrl;
                         profile.name = requestProfile.name;
                         profile.about = requestProfile.about;
-                        profile.birthday = requestProfile.birthday;
-                        profile.hobbies = requestProfile.hobbies;
+                        profile.occupation = requestProfile.occupation;
+                        profile.studies = requestProfile.studies;
+                        profile.languages = requestProfile.languages;
+                        profile.job = requestProfile.job;
+                        profile.address = requestProfile.address;
+                        profile.phone = requestProfile.phone;
+                        profile.email = requestProfile.email;
+                        profile.web = requestProfile.web;
+
                         //profile.privateP = requestProfile.privateP;
                         db.SaveChanges();
                         TempData["message"] = "Profilul a fost modificat!";

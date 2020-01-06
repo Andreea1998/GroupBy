@@ -2,7 +2,7 @@
 
 <style>
     body {
-        background-image: url("../../Content/Images/tm-bg-slide-1.jpg");
+        background-image: url(@Model.backgroundImageUrl);
         background-size: cover;
     }
 </style>
@@ -28,7 +28,7 @@
                     <img src='@Model.profileImageUrl' class="profile-img img-responsive img-circle tm-border" alt="templatemo easy profile">
                     <hr>
                     <h1 class="tm-title bold shadow">@Model.name</h1>
-                    <h1 class="white bold shadow">Creative Director</h1>
+                    <h1 class="white bold shadow">@Model.occupation</h1>
                 </div>
             </div>
         </div>
@@ -37,25 +37,29 @@
     <!-- about and skills section -->
     <section class="container">
         <div class="row">
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-4 col-sm-12">
                 <div class="about">
-                    <h3 class="accent">My Profile</h3>
-                    <h2>About me</h2>
-                    <p> "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat</p>
+                    <h2>My menu</h2>
+                    <ul style="list-style-type:none;">
+                        <li><h5>@Html.ActionLink("Albums", "Index", "Album", new { @id = Model.user.Id }, null)</h5></li>
+                        <hr class="divider">
+                        <li><h5>@Html.ActionLink("Message center", "Index", "Album", new { @id = Model.user.Id }, null)</h5></li>
+                        <hr class="divider">
+                        <li>
+                            <h5>
+                                @if (ViewBag.LoggedIn && ViewBag.currentUserId == Model.userId)
+                                {
+                                    @Html.ActionLink("Edit your profile", "Edit", "Profile", new { @id = Model.profileID }, null)
+                                }
+                            </h5>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-md-8 col-sm-12">
                 <div class="skills">
-                    <h2 class="white">Shortcuts</h2>
-                    <strong>Photo albums</strong>
-                    @Html.ActionLink("Albums", "Index", "Album", new { @id = Model.user.Id }, null)
-                    <strong>My chatting groups</strong>
-                    @Html.ActionLink("Message center", "Index", "Album", new { @id = Model.user.Id }, null)
-                    @if (ViewBag.LoggedIn && ViewBag.currentUserId == Model.userId)
-                    {
-                        <strong>Edit your settings</strong>
-                        @Html.ActionLink("Edit your profile", "Edit", "Profile", new { @id = Model.profileID }, null)
-                    }
+                    <h2>About me</h2>
+                    <p> @Model.about</p>
                 </div>
             </div>
         </div>
@@ -66,57 +70,39 @@
         <div class="row">
             <div class="col-md-8 col-sm-12">
                 <div class="education">
-                    <h2 class="white">Hobbies</h2>
+                    <h2 class="white">My Studies</h2>
                     <div class="education-content">
-                        <!--
-                        <div class="education-school">
-                            <h5>School of Media</h5><span></span>
-                            <h5>2030 January - 2034 December</h5>
-                        </div>
-                            -->
-                        <p class="education-description">In lacinia leo sed quam feugiat, ac efficitur dui tristique. Ut venenatis, odio quis cursus egestas, nulla sem volutpat diam, ac dapibus nisl ipsum ut ipsum. Nunc tincidunt libero non magna placerat elementum.</p>
+                        <p>@Model.studies</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="languages">
-                    <h2>Languages</h2>
-                    <ul>
-                        <li>Myanmar / Thai</li>
-                        <li>English / Spanish</li>
-                        <li>Chinese / Japanese</li>
-                        <li>Arabic / Hebrew</li>
-                    </ul>
+                    <h2>Known Languages</h2>
+                    <p>@Model.languages</p>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- contact and experience -->
-    <!--
+    <!-- contact and work experience -->
     <section class="container">
         <div class="row">
             <div class="col-md-4 col-sm-12">
                 <div class="contact">
                     <h2>Contact</h2>
-                    <p><i class="fa fa-map-marker"></i> 123 Rama IX Road, Bangkok</p>
-                    <p><i class="fa fa-phone"></i> 010-020-0890</p>
-                    <p><i class="fa fa-envelope"></i> easy@company.com</p>
-                    <p><i class="fa fa-globe"></i> www.company.com</p>
+                    <p><i class="glyphicon glyphicon-map-marker"></i> @Model.address</p>
+                    <p><i class="glyphicon glyphicon-earphone"></i> @Model.phone</p>
+                    <p><i class="glyphicon glyphicon-envelope"></i> @Model.email</p>
+                    <p><i class="glyphicon glyphicon-globe"></i> @Model.web</p>
                 </div>
             </div>
             <div class="col-md-8 col-sm-12">
                 <div class="experience">
-                    <h2 class="white">Experiences</h2>
-                    <div class="experience-content">
-                        <h4 class="experience-title accent">Website Development</h4>
-                        <h5>New Media Company</h5><span></span>
-                        <h5>2035 January - 2036 April</h5>
-                        <p class="education-description">Cras porta tincidunt sem, in sollicitudin lorem efficitur ut. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet.</p>
-                    </div>
+                    <h2 class="white">Work Experience</h2>
+                    <p>@Model.job </p>
                 </div>
             </div>
         </div>
     </section>
-    -->
+
 </div>
