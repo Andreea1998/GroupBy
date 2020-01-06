@@ -4,7 +4,6 @@
 	ViewBag.Title = "Show";
 }
 
-<h2>Show</h2>
 
 <div>
 	<h4>Photo</h4>
@@ -14,7 +13,16 @@
 	{
 		<h3>@comment.userName</h3>
 		<p>@comment.text</p>
-	}
+
+        if(ViewBag.currentUser == comment.userID)
+        {
+            using (Html.BeginForm("Delete","Comment",new { commentId = comment.commentID },FormMethod.Post))
+            {
+                Html.HttpMethodOverride(HttpVerbs.Delete);
+                <button class="btn btn-success" type="submit">Delete</button>
+            }
+        }
+    }
 
 	@using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
 	{

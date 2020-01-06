@@ -27,7 +27,8 @@ namespace Facebook.Controllers
 				if (ModelState.IsValid)
 				{
 					ApplicationUser user = db.Users.Find(comment.userID);
-					comment.userName = user.UserName;
+                    Profile profile = db.Profiles.Where(data => data.userId == user.Id).ToList()[0];
+                    comment.userName = profile.name;
 					db.Comments.Add(comment);
 					db.SaveChanges();
 					TempData["message"] = "Comentariul a fost creat!";
@@ -44,5 +45,23 @@ namespace Facebook.Controllers
 				return RedirectToAction("Show", "Photo", new { id = comment.photoID });
 			}
 		}
+
+        [HttpDelete]
+        public ActionResult Delete(int commentId)
+        {
+            Comment comment = db.Comments.Find(commentId);
+            try
+            {
+                db.Comments.Remove(comment);
+                db.SaveChanges();
+                //return RedirectToAction("Show", "Photo", new { id = photoId});
+            }
+            catch (Exception e)
+            {
+                //return RedirectToAction("Show", "Photo", new { id = photoId});
+            }
+            //return RedirectToAction("Show", "Photo", new { id = photoId });
+            return RedirectToAction("Index","Home");
+        }
     }
 }

@@ -4,11 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Your albums</h2>
+@if (ViewBag.userId == ViewBag.currentUserId)
+{
+    <h2>Your albums</h2>
+}
+else
+{
+    <h2>@ViewBag.userName's albums</h2>
+}
 
-<p>
-    @Html.ActionLink("Create New", "New", "Album",new { @id = ViewBag.userId },null)
-</p>
+
+@if (ViewBag.userId == ViewBag.currentUserId)
+{
+    <p>
+        @Html.ActionLink("Create New", "New", "Album", new { @id = ViewBag.userId }, null)
+    </p>
+}
+
 
 <table class="table">
     <tr>
@@ -18,23 +30,28 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
+            </td>
 
-        <td>
-            @using (Html.BeginForm(actionName: "Edit", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
+            
+            @if (ViewBag.userId == ViewBag.currentUserId)
             {
-                @Html.ActionLink("Edit", "Edit")
-            }|
-            @using (Html.BeginForm(actionName: "Delete", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
-            {
-                @Html.ActionLink("Delete", "Delete" )
+                <td>
+                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
+                    {
+                        @Html.ActionLink("Edit", "Edit")
+                    }
+                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
+                    {
+                        @Html.ActionLink("Delete", "Delete")
+                    }
+                </td>
             }
-        </td>
-    </tr>
-}
+        </tr>
+    }
 
 </table>

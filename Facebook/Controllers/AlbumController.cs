@@ -14,15 +14,18 @@ namespace Facebook.Controllers
 	{
 		private ApplicationDbContext db = new ApplicationDbContext();
 
-		// GET: Album
+		// GET: Albums
 		[Route("Index/{id}")]
 		public ActionResult Index(string id)
 		{
 			ApplicationUser user = db.Users.Find(id);
+            Profile profile = db.Profiles.Where(data => data.userId == user.Id).ToList()[0];
 			IEnumerable<Album> albums = db.Albums.Where(m => m.userId == id).ToList();
 			//Might not need 
 			ViewBag.Albums = albums;
 			ViewBag.userId = id;
+            ViewBag.currentUserId = User.Identity.GetUserId();
+            ViewBag.userName = profile.name;
 			//
 			return View(albums);
 		}

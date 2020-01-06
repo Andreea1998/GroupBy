@@ -61,12 +61,19 @@ namespace Facebook.Controllers
 		public ActionResult Show(int id)
 		{
 			Photo photo = db.Photos.Find(id);
-			IEnumerable<Comment> comments = db.Comments.Where(m => m.photoID == id).ToList();
+
+            Album album = db.Albums.Find(photo.albumID);
+            ApplicationUser user = db.Users.Find(album.userId);
+            Profile profile = db.Profiles.Where(data => data.userId == user.Id).ToList()[0];
+            IEnumerable<Comment> comments = db.Comments.Where(m => m.photoID == id).ToList();
 			PhotoWithComments photoWithComments = new PhotoWithComments();
 			photoWithComments.photo = photo;
 			photoWithComments.comments = comments;
 
 			ViewBag.currentUser = User.Identity.GetUserId();
+            //Info about the user who owns the photo
+            ViewBag.userName = profile.name;
+            ViewBag.userId = user.Id;
 
 			return View(photoWithComments);
 		}
