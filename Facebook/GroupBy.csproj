@@ -249,7 +249,6 @@
     <Content Include="Views\Profile\Show.cshtml" />
     <Content Include="Views\Profile\New.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
-    <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Profile\Delete.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Album\New.cshtml" />
@@ -257,6 +256,7 @@
     <Content Include="Views\Photo\New.cshtml" />
     <Content Include="Views\Photo\Show.cshtml" />
     <Content Include="Views\Album\Delete.cshtml" />
+    <Content Include="Views\Profile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

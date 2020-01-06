@@ -32,6 +32,8 @@ namespace Facebook.Controllers
 
 			ViewBag.LoggedIn = false;
 			ViewBag.Administrator = false;
+            ViewBag.currentUserId = User.Identity.GetUserId();
+            Debug.WriteLine(user.Id);
 
 			if (User.IsInRole("User"))
 			{
@@ -42,7 +44,9 @@ namespace Facebook.Controllers
 				ViewBag.Administrator = true;
 			}
 
-			return View(profile);
+            ViewBag.LoggedIn = true;
+
+            return View(profile);
 		}
 
 		public ActionResult New()
@@ -94,5 +98,58 @@ namespace Facebook.Controllers
 				return View(profile);
 			} 
 		}
+
+        //[Authorize(Roles = "Editor,Administrator")]
+        public ActionResult Edit(int id)
+        {
+            Profile profile = db.Profiles.Find(id);
+
+            if (profile.userId == User.Identity.GetUserId() ||
+                User.IsInRole("Administrator"))
+            {
+                return View(profile);
+            }
+            else
+            {
+                TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui Profile care nu va apartine!";
+                return RedirectToAction("Show",new {id=profile.userId });
+            }
+
+        }
+
+        [HttpPut]
+        public ActionResult Edit(Profile requestProfile)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Profile profile = db.Profiles.Find(requestProfile.profileID);
+                    if (TryUpdateModel(profile))
+                    {
+                        profile.profileImageUrl = requestProfile.profileImageUrl;
+                        profile.name = requestProfile.name;
+                        profile.about = requestProfile.about;
+                        profile.birthday = requestProfile.birthday;
+                        profile.hobbies = requestProfile.hobbies;
+                        //profile.privateP = requestProfile.privateP;
+                        db.SaveChanges();
+                        TempData["message"] = "Profilul a fost modificat!";
+                    }
+
+                    return RedirectToAction("Show", new { id = profile.userId });
+                }
+                else
+                {
+                    return View(requestProfile);
+                }
+            }
+            catch (Exception e)
+            {
+                
+                return View(requestProfile);
+            }
+        }
+
     }
 }
