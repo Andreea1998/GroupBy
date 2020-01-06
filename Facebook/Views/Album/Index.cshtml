@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Facebook.Models.Album>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
 @if (ViewBag.userId == ViewBag.currentUserId)
@@ -31,14 +31,14 @@ else
     </tr>
 
     @foreach (var item in Model)
-    {
+	{
         <tr>
             <td>
                 @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
             </td>
 
             
-            @if (ViewBag.userId == ViewBag.currentUserId)
+            @if (ViewBag.userId == ViewBag.currentUserId||ViewBag.administrator)
             {
                 <td>
                     @using (Html.BeginForm(actionName: "Edit", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))

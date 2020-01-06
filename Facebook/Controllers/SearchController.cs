@@ -10,6 +10,7 @@ namespace Facebook.Controllers
     public class SearchController : Controller
     {
 		private ApplicationDbContext db = new ApplicationDbContext();
+
 		public ActionResult Search(string searchText)
         {
 			List<Search> results = new List<Search>();

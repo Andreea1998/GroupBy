@@ -1,14 +1,17 @@
 ﻿@model IEnumerable<Facebook.Models.Photo>
 
 @{
-    ViewBag.Title = "Photos";
+	ViewBag.Title = "Photos";
+}
+@if (ViewBag.currentUser==ViewBag.ownerUser)
+{
+	<div class="container mt-4">
+		<div class="row text-center mt-2">
+			@Html.ActionLink("Add new photo", "New", "Photo", new { @id = ViewBag.albumId }, new { @class = "btn btn-success" })
+		</div>
+	</div>
 }
 
-<div class="container mt-4">
-	<div class="row text-center mt-2">
-		@Html.ActionLink("Add new photo", "New", "Photo", new { @id = ViewBag.albumId },new { @class="btn btn-success" })
-	</div>
-</div>
 <div class="container">
 
 		<h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">@ViewBag.albumName</h1>

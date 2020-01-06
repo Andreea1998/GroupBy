@@ -3,6 +3,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using Owin;
+using System.Web.Mvc;
 
 [assembly: OwinStartupAttribute(typeof(Facebook.Startup))]
 namespace Facebook
@@ -34,12 +35,20 @@ namespace Facebook
 				var user = new ApplicationUser();
 				user.UserName = "admin@admin.com";
 				user.Email = "admin@admin.com";
+				user.profileID = 1;
 				var adminCreated = UserManager.Create(user, "Administrator1!");
 				if (adminCreated.Succeeded)
 				{
 					UserManager.AddToRole(user.Id, "Administrator");
+					Profile profile = new Profile();
+					profile.name = "Administrator";
+					profile.about = "The administrator of the website";
+					profile.userId = user.Id;
+					context.Profiles.Add(profile);
+					context.SaveChanges();
 				}
 			}
+			//Might delete this
 			if (!roleManager.RoleExists("NonRegisteredUser"))
 			{
 				var role = new IdentityRole();

@@ -20,6 +20,7 @@ namespace Facebook.Controllers
         }
 
 		[HttpPost]
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult New(Comment comment)
 		{
 			try
@@ -36,7 +37,6 @@ namespace Facebook.Controllers
 				}
 				else
 				{
-					Debug.WriteLine("Hello?");
 					return RedirectToAction("Show", "Photo", new { id = comment.photoID });
 				}
 			}

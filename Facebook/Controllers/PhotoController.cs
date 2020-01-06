@@ -18,12 +18,27 @@ namespace Facebook.Controllers
 		{
 			IEnumerable<Photo> photos = db.Photos.Where(m => m.albumID == id).ToList();
 			Album album = db.Albums.Find(id);
+
+			ViewBag.loggedIn = false;
+			ViewBag.administrator = false;
+
+			if (User.IsInRole("User"))
+			{
+				ViewBag.loggedIn = true;
+			}
+			if (User.IsInRole("Administrator"))
+			{
+				ViewBag.administrator = true;
+			}
+			ViewBag.ownerUser = db.Users.Find(album.userId).Id;
+			ViewBag.currentUser = User.Identity.GetUserId();
 			ViewBag.albumName = album.name;
 			ViewBag.albumId = id;
 			return View(photos);
 		}
 
 		//Create new photo with id as albumId
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult New(int id)
 		{
 			Album album = db.Albums.Find(id);
@@ -34,6 +49,7 @@ namespace Facebook.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult New(Photo photo)
 		{
 			try
@@ -70,9 +86,19 @@ namespace Facebook.Controllers
 			photoWithComments.photo = photo;
 			photoWithComments.comments = comments;
 
+			ViewBag.loggedIn = false;
+			ViewBag.administrator = false;
+			if(User.IsInRole("User"))
+			{
+				ViewBag.loggedIn = true;
+			}
+			if(User.IsInRole("Administrator"))
+			{
+				ViewBag.administrator = true;
+			}
 			ViewBag.currentUser = User.Identity.GetUserId();
-            //Info about the user who owns the photo
-            ViewBag.userName = profile.name;
+			//Info about the user who owns the photo
+			ViewBag.userName = profile.name;
             ViewBag.userId = user.Id;
 
 			return View(photoWithComments);

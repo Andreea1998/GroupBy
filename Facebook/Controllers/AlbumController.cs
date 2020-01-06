@@ -21,6 +21,17 @@ namespace Facebook.Controllers
 			ApplicationUser user = db.Users.Find(id);
             Profile profile = db.Profiles.Where(data => data.userId == user.Id).ToList()[0];
 			IEnumerable<Album> albums = db.Albums.Where(m => m.userId == id).ToList();
+			ViewBag.loggedIn = false;
+			ViewBag.administrator = false;
+
+			if (User.IsInRole("User"))
+			{
+				ViewBag.loggedIn = true;
+			}
+			if (User.IsInRole("Administrator"))
+			{
+				ViewBag.administrator = true;
+			}
 			//Might not need 
 			ViewBag.Albums = albums;
 			ViewBag.userId = id;
@@ -29,7 +40,7 @@ namespace Facebook.Controllers
 			//
 			return View(albums);
 		}
-
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult New(string id)
 		{
 			ApplicationUser user = db.Users.Find(id);
@@ -40,6 +51,7 @@ namespace Facebook.Controllers
 		}
 
 		[HttpPost]
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult New(Album album)
 		{
 			try
@@ -69,7 +81,7 @@ namespace Facebook.Controllers
 			}
 		}
 
-		[Authorize(Roles = "Editor,Administrator")]
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult Edit(string id)
 		{
 			Album album = db.Albums.Find(id);
@@ -90,7 +102,7 @@ namespace Facebook.Controllers
 		}
 
 		[HttpPut]
-		//[Authorize(Roles = "Editor,Administrator")]
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult Edit(string id, Album requestAlbum)
 		{
 

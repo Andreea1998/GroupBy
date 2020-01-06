@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Facebook.Controllers
 {   
-	[Authorize]
+	
     public class ProfileController : Controller
     {
 		private ApplicationDbContext db = new ApplicationDbContext();
@@ -25,11 +25,11 @@ namespace Facebook.Controllers
 		[Route("Show/{id}")]
 		public ActionResult Show(string id)
 		{
-			//System.Diagnostics.Debug.WriteLine(id);
+			System.Diagnostics.Debug.WriteLine(id);
 			ApplicationUser user = db.Users.Find(id);
-			//System.Diagnostics.Debug.WriteLine(user.profileID);
+			System.Diagnostics.Debug.WriteLine(user.profileID);
 			Profile profile = db.Profiles.Find(user.profileID);
-
+			Debug.WriteLine(profile);
 			ViewBag.LoggedIn = false;
 			ViewBag.Administrator = false;
             ViewBag.currentUserId = User.Identity.GetUserId();
@@ -44,21 +44,28 @@ namespace Facebook.Controllers
 				ViewBag.Administrator = true;
 			}
 
-            ViewBag.LoggedIn = true;
-
             return View(profile);
 		}
 
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult New()
 		{
-			Profile profile = new Profile();
-			//ApplicationUser user = db.Users.Find(User.Identity.GetUserId());
-			profile.userId = User.Identity.GetUserId(); 
-			return View(profile);
+			string userId = User.Identity.GetUserId();
+			int profileExists = db.Profiles.Where(m => m.userId == userId ).ToList().Count();
+			if(profileExists>0)
+			{
+				return RedirectToAction("Show", "Profile", new { @id = User.Identity.GetUserId() });
+			}
+			else
+			{
+				Profile profile = new Profile();
+				profile.userId = User.Identity.GetUserId();
+				return View(profile);
+			}
 		}
 
 		[HttpPost]
-		//[Authorize(Roles = "User,Administrator")]
+		[Authorize(Roles = "User,Administrator")]
 		public ActionResult New(Profile profile)
 		{
 			try
@@ -99,7 +106,7 @@ namespace Facebook.Controllers
 			} 
 		}
 
-        //[Authorize(Roles = "Editor,Administrator")]
+        [Authorize(Roles = "User,Administrator")]
         public ActionResult Edit(int id)
         {
             Profile profile = db.Profiles.Find(id);
@@ -118,7 +125,8 @@ namespace Facebook.Controllers
         }
 
         [HttpPut]
-        public ActionResult Edit(Profile requestProfile)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Edit(Profile requestProfile)
         {
             try
             {

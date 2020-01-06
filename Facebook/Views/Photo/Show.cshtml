@@ -14,24 +14,27 @@
 		<h3>@comment.userName</h3>
 		<p>@comment.text</p>
 
-		if(ViewBag.currentUser == comment.userID)
+		if (ViewBag.currentUser == comment.userID ||ViewBag.administrator)
 		{
 
-			using (Html.BeginForm("Delete", "Comment", new { commentId = comment.commentID,photoId=comment.photoID}, FormMethod.Post,null))
-			{
+		using (Html.BeginForm("Delete", "Comment", new { commentId = comment.commentID, photoId = comment.photoID }, FormMethod.Post, null))
+		{
 				@Html.HttpMethodOverride(HttpVerbs.Delete);
-                <button class="btn btn-success" type="submit">Delete</button>
+				<button class="btn btn-success" type="submit">Delete</button>
 			}
 		}
 	}
-
-	@using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
+	@if (ViewBag.loggedIn || ViewBag.administrator)
 	{
-		@Html.Label("Add new comment")
-		@Html.Hidden("userID", (string)ViewBag.currentUser.ToString())
-		@Html.Hidden("photoID", Model.photo.photoID)
-		@Html.TextBox("text", null, new { @class = "form-control" })
-		<br />
-		<button class="btn btn-success" type="submit">Add</button>
+		using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
+		{
+			@Html.Label("Add new comment")
+			@Html.Hidden("userID", (string)ViewBag.currentUser.ToString())
+			@Html.Hidden("photoID", Model.photo.photoID)
+			@Html.TextBox("text", null, new { @class = "form-control" })
+			<br />
+			<button class="btn btn-success" type="submit">Add</button>
+		}
 	}
+
 </div>
