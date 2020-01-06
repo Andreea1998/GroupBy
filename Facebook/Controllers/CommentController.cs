@@ -47,21 +47,13 @@ namespace Facebook.Controllers
 		}
 
         [HttpDelete]
-        public ActionResult Delete(int commentId)
+        public ActionResult Delete(int commentId,int photoId)
         {
+			
             Comment comment = db.Comments.Find(commentId);
-            try
-            {
-                db.Comments.Remove(comment);
-                db.SaveChanges();
-                //return RedirectToAction("Show", "Photo", new { id = photoId});
-            }
-            catch (Exception e)
-            {
-                //return RedirectToAction("Show", "Photo", new { id = photoId});
-            }
-            //return RedirectToAction("Show", "Photo", new { id = photoId });
-            return RedirectToAction("Index","Home");
-        }
+            db.Comments.Remove(comment);
+            db.SaveChanges();
+			return RedirectToAction("Show", "Photo", new { id = photoId});
+		}
     }
 }

@@ -14,15 +14,16 @@
 		<h3>@comment.userName</h3>
 		<p>@comment.text</p>
 
-        if(ViewBag.currentUser == comment.userID)
-        {
-            using (Html.BeginForm("Delete","Comment",new { commentId = comment.commentID },FormMethod.Post))
-            {
-                Html.HttpMethodOverride(HttpVerbs.Delete);
+		if(ViewBag.currentUser == comment.userID)
+		{
+
+			using (Html.BeginForm("Delete", "Comment", new { commentId = comment.commentID,photoId=comment.photoID}, FormMethod.Post,null))
+			{
+				@Html.HttpMethodOverride(HttpVerbs.Delete);
                 <button class="btn btn-success" type="submit">Delete</button>
-            }
-        }
-    }
+			}
+		}
+	}
 
 	@using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
 	{

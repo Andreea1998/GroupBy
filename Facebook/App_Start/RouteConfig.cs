@@ -13,6 +13,14 @@ namespace Facebook
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			
+			routes.MapRoute(
+				"DeleteComment",                                              // Route name
+				"Comment/Delete/{commentId}/{photoId}",                           // URL with parameters
+				new { controller = "Comment", action = "Delete", commentId=UrlParameter.Optional, photoId = UrlParameter.Optional }  // Parameter defaults
+			);
+			
+
 			routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
