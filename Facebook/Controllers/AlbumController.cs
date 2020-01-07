@@ -82,7 +82,7 @@ namespace Facebook.Controllers
 		}
 
 		[Authorize(Roles = "User,Administrator")]
-		public ActionResult Edit(string id)
+		public ActionResult Edit(int id)
 		{
 			Album album = db.Albums.Find(id);
 			ViewBag.Album = album;
@@ -103,14 +103,14 @@ namespace Facebook.Controllers
 
 		[HttpPut]
 		[Authorize(Roles = "User,Administrator")]
-		public ActionResult Edit(string id, Album requestAlbum)
+		public ActionResult Edit(Album requestAlbum)
 		{
 
 			try
 			{
 				if (ModelState.IsValid)
 				{
-					Album album = db.Albums.Find(id);
+					Album album = db.Albums.Find(requestAlbum.albumID);
 					if (album.userId == User.Identity.GetUserId() ||
 						User.IsInRole("Administrator"))
 					{
@@ -120,12 +120,12 @@ namespace Facebook.Controllers
 							db.SaveChanges();
 							TempData["message"] = "Albumul a fost modificat!";
 						}
-						return RedirectToAction("Index");
+						return RedirectToAction("Index","Album",new {@id=album.userId});
 					}
 					else
 					{
 						TempData["message"] = "Nu aveti dreptul sa faceti modificari asupra unui album care nu va apartine!";
-						return RedirectToAction("Index");
+						return RedirectToAction("Index", "Album", new { @id = album.userId });
 					}
 
 				}
@@ -141,7 +141,31 @@ namespace Facebook.Controllers
 			}
 		}
 
-	
+		[HttpDelete]
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Delete(int id)
+		{
+
+			Album album = db.Albums.Find(id);
+			string userId = album.userId;
+
+			//Delete photos and comments first
+			IEnumerable<Photo> photos = db.Photos.Where(m => m.albumID == album.albumID).ToList();
+			foreach(Photo photo in photos)
+			{
+				IEnumerable<Comment> comments = db.Comments.Where(m => m.photoID == photo.photoID).ToList();
+				foreach(Comment comment in comments)
+				{
+					db.Comments.Remove(comment);
+				}
+				db.Photos.Remove(photo);
+			}
+			db.Albums.Remove(album);
+			db.SaveChanges();
+			return RedirectToAction("Index", "Album", new { id = userId });
+		}
+
+
 
 	}
 }

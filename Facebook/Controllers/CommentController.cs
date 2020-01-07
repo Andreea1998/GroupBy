@@ -47,7 +47,8 @@ namespace Facebook.Controllers
 		}
 
         [HttpDelete]
-        public ActionResult Delete(int commentId,int photoId)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Delete(int commentId,int photoId)
         {
 			
             Comment comment = db.Comments.Find(commentId);

@@ -257,9 +257,9 @@
     <Content Include="Views\Photo\Index.cshtml" />
     <Content Include="Views\Photo\New.cshtml" />
     <Content Include="Views\Photo\Show.cshtml" />
-    <Content Include="Views\Album\Delete.cshtml" />
     <Content Include="Views\Profile\Edit.cshtml" />
     <Content Include="Views\Search\Search.cshtml" />
+    <Content Include="Views\Album\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

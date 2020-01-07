@@ -39,15 +39,17 @@ else
 
         @if (ViewBag.userId == ViewBag.currentUserId||ViewBag.administrator)
         {
+		<td>
+			@Html.ActionLink("Edit", "Edit", "Album", new { @id = item.albumID },new {@class="btn btn-success"})
+		</td>
         <td>
            
-            @using (Html.BeginForm("Delete", "Album", new { @id = item.albumID }, FormMethod.Post, null))
-            {
+            @using (Html.BeginForm("Delete", "Album", new {id = item.albumID}, FormMethod.Post, null))
+			{
                 @Html.HttpMethodOverride(HttpVerbs.Delete);
                 <button class="btn btn-success" type="submit">Delete</button>
             }
         </td>
-    
         }
     </tr>
     }
