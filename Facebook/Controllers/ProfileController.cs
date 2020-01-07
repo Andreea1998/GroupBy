@@ -29,11 +29,39 @@ namespace Facebook.Controllers
 			ApplicationUser user = db.Users.Find(id);
 			System.Diagnostics.Debug.WriteLine(user.profileID);
 			Profile profile = db.Profiles.Find(user.profileID);
-			Debug.WriteLine(profile);
-			ViewBag.LoggedIn = false;
+			
+            string loggedInUser = User.Identity.GetUserId();
+            ViewBag.LoggedIn = false;
 			ViewBag.Administrator = false;
-            ViewBag.currentUserId = User.Identity.GetUserId();
-            Debug.WriteLine(user.Id);
+            ViewBag.currentUserId = loggedInUser;
+            //Daca cel ce vizualizeaza profilul nu detine profilul
+            if (loggedInUser != id)
+            {
+                ViewBag.friendRequest = false;
+                int entries = db.Friends.Where(m => (m.requestBy == loggedInUser && m.requestTo == id) || (m.requestBy == id && m.requestTo == loggedInUser)).ToList().Count();
+                if(entries>0)
+                {
+                    Friends res = db.Friends.Where(m => (m.requestBy == loggedInUser && m.requestTo == id) || (m.requestBy == id && m.requestTo == loggedInUser)).ToList()[0];
+                    ViewBag.friendRequest = true;
+
+                    if (res.friends == true)
+                    {
+                        ViewBag.friendMsg = "You are friends with this person";
+                    }
+                    else
+                    {
+                        if (loggedInUser == res.requestTo)
+                        {
+                            ViewBag.friendMsg = "You recieved a friend request from this person";
+
+                        }
+                        else if (loggedInUser == res.requestBy)
+                        {
+                            ViewBag.friendMsg = "You sent a friend request to this person";
+                        }
+                    }
+                }       
+            }
 
 			if (User.IsInRole("User"))
 			{
@@ -41,7 +69,8 @@ namespace Facebook.Controllers
 			}
 			if (User.IsInRole("Administrator"))
 			{
-				ViewBag.Administrator = true;
+                ViewBag.LoggedIn = true;
+                ViewBag.Administrator = true;
 			}
 
             return View(profile);

@@ -27,6 +27,20 @@
                     <hr>
                     <h1 class="tm-title bold shadow">@Model.name</h1>
                     <h1 class="white bold shadow">@Model.occupation</h1>
+                    @if (ViewBag.LoggedIn && (ViewBag.currentUserId != Model.userId))
+                    {
+                        if (!ViewBag.friendRequest)
+                        {
+                            using (Html.BeginForm("SendFriendRequest", "Friends", new { @requestBy = ViewBag.currentUserId, @requestTo = Model.userId }, FormMethod.Post))
+                            {
+                                <input type="submit" value="Send Friend Request" class="btn btn-default" />
+                            }
+                        }
+                        else
+                        {
+                            <h3>@ViewBag.friendMsg</h3>
+                        }
+                    }
                 </div>
             </div>
         </div>
@@ -39,18 +53,26 @@
                 <div class="about">
                     <h2>My menu</h2>
                     <ul style="list-style-type:none;">
-                        <li><h5>@Html.ActionLink("Albums", "Index", "Album", new { @id = Model.user.Id }, null)</h5></li>
+                        <li><h4>@Html.ActionLink("Albums", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
                         <hr class="divider">
-                        <li><h5>@Html.ActionLink("Message center", "Index", "Album", new { @id = Model.user.Id }, null)</h5></li>
+                        <li><h4>@Html.ActionLink("Message center", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
                         <hr class="divider">
-                        <li>
-                            <h5>
-                                @if (ViewBag.LoggedIn && ViewBag.currentUserId == Model.userId)
-                                {
+                        @if (ViewBag.LoggedIn && ViewBag.currentUserId == Model.userId)
+                        {
+                            <li>
+                                <h4>
                                     @Html.ActionLink("Edit your profile", "Edit", "Profile", new { @id = Model.profileID }, null)
-                                }
-                            </h5>
-                        </li>
+                                </h4>
+                            </li>
+                            <hr class="divider">
+                            <li>
+                                <h4>
+                                    @Html.ActionLink("Friend Requests", "ShowFriendRequests", "Friends", new { @id = Model.userId }, null)
+                                </h4>
+                            </li>
+                        }
+                        <hr class="divider">
+                        <li><h4> @Html.ActionLink("Friends", "ShowFriends", "Friends", new { @id = Model.userId }, null) </h4></li>
                     </ul>
                 </div>
             </div>

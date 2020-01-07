@@ -45,6 +45,7 @@ namespace Facebook.Models
 		public DbSet<Comment> Comments { get; set; }
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Message> Messages { get; set; }
+        public DbSet<Friends> Friends { get; set; }
 
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{

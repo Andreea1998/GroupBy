@@ -24,9 +24,26 @@ namespace Facebook
 				"Search/Search/{searchText}",                          
 				new { controller = "Search", action = "Search", searchText = UrlParameter.Optional } 
 			);
+            routes.MapRoute(
+                "FriendRequest",
+                "Friends/SendFriendRequest/{requestBy}/{requestTo}",
+                new { controller = "Friends", action = "SendFriendRequest", requestBy = UrlParameter.Optional , requestTo = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "AcceptFriendRequest",
+                "Friends/AcceptFriendRequest/{requestBy}/{requestTo}",
+                new { controller = "Friends", action = "AcceptFriendRequest", requestBy = UrlParameter.Optional, requestTo = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                "DeleteFriendRequest",
+                "Friends/DeleteFriendRequest/{requestBy}/{requestTo}",
+                new { controller = "Friends", action = "DeleteFriendRequest", requestBy = UrlParameter.Optional, requestTo = UrlParameter.Optional }
+            );
 
 
-			routes.MapRoute(
+
+            routes.MapRoute(
 				name: "Default",
 				url: "{controller}/{action}/{id}",
 				defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

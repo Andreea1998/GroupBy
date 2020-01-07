@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Facebook.Models.Profile>
+
+
+@{
+    ViewBag.Title = "Friend Request";
+}
+
+
+<ul>
+    @foreach(var profile in Model)
+    {
+    <li>
+        <h2>@profile.name</h2>
+        <p>@profile.about</p>
+        @Html.ActionLink("Accept", "AcceptFriendRequest", "Friends", new { @requestBy = profile.userId, @requestTo = ViewBag.loggedInUser }, new { @class = "btn btn-success" })
+        @Html.ActionLink("Ignore", "DeleteFriendRequest", "Friends", new { @requestBy = profile.userId, @requestTo = ViewBag.loggedInUser }, new { @class = "btn btn-success" })
+    </li>
+    }
+</ul>
