@@ -26,7 +26,11 @@ textarea {
 
 /* Logo img.. needes repositioning and resizing*/
 .logo-header >img {
-	height: 50px;
-	width: 100px;
-	display:none;
+	height: 25px;
 }
+
+/*.navbar-form {
+    text-align-last: center;
+    padding: 0px;
+}
+    */

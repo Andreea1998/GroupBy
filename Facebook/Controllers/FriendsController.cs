@@ -46,6 +46,7 @@ namespace Facebook.Controllers
 
             return View(friends);
         }
+
         public ActionResult ShowFriendRequests(string id)
         {
             IEnumerable<Friends> requests = db.Friends.Where(m => m.requestTo==id && m.friends == false).ToList();
@@ -92,6 +93,7 @@ namespace Facebook.Controllers
 
             return RedirectToAction("ShowFriendRequests", "Friends", new { @id = requestTo });
         }
+
         public ActionResult DeleteFriendRequest(string requestBy, string requestTo)
         {
             Friends request = db.Friends.Where(m => (m.requestBy == requestBy && m.requestTo == requestTo)|| (m.requestBy == requestTo && m.requestTo == requestBy)).ToList()[0];
