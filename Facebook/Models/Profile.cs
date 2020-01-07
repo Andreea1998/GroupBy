@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace Facebook.Models
         public string email { get; set; }
         public string web { get; set; }
         public bool active { get; set; }
+		[DefaultValue("false")]
         public bool privateP { get; set; }
 
 		

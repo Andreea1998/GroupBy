@@ -7,7 +7,7 @@
     @foreach(var profile in Model)
     {
     <li>
-        <h2>@profile.name</h2>
+		@Html.ActionLink(profile.name,"Show","Profile",new {@id=profile.userId },new {@class="strong" })
         <p>@profile.about</p>
         @if (ViewBag.loggedIn && (ViewBag.loggedInUser == ViewBag.ownsProfile))
         {

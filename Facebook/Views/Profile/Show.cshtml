@@ -18,111 +18,126 @@
 
 <div class="backdrop">
 
-    <!-- header section -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12 col-sm-12">
-                    <img src='@Model.profileImageUrl' class="profile-img img-responsive img-circle tm-border" alt="templatemo easy profile">
-                    <hr>
-                    <h1 class="tm-title bold shadow">@Model.name</h1>
-                    <h1 class="white bold shadow">@Model.occupation</h1>
-                    @if (ViewBag.LoggedIn && (ViewBag.currentUserId != Model.userId))
-                    {
-                        if (!ViewBag.friendRequest)
-                        {
-                            using (Html.BeginForm("SendFriendRequest", "Friends", new { @requestBy = ViewBag.currentUserId, @requestTo = Model.userId }, FormMethod.Post))
-                            {
-                                <input type="submit" value="Send Friend Request" class="btn btn-default" />
-                            }
-                        }
-                        else
-                        {
-                            <h3>@ViewBag.friendMsg</h3>
-                        }
-                    }
-                </div>
-            </div>
-        </div>
-    </header>
+	<!-- header section -->
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<img src='@Model.profileImageUrl' class="profile-img img-responsive img-circle tm-border" alt="templatemo easy profile">
+					<hr>
+					<h1 class="tm-title bold shadow">@Model.name</h1>
+					<h1 class="white bold shadow">@Model.occupation</h1>
+					@if (ViewBag.LoggedIn && (ViewBag.currentUserId != Model.userId))
+					{
+						if (!ViewBag.friendRequest)
+						{
+							using (Html.BeginForm("SendFriendRequest", "Friends", new { @requestBy = ViewBag.currentUserId, @requestTo = Model.userId }, FormMethod.Post))
+							{
+								<input type="submit" value="Send Friend Request" class="btn btn-default" />
+							}
+						}
+						else
+						{
+							<h3>@ViewBag.friendMsg</h3>
+						}
+					}
+				</div>
+			</div>
+		</div>
+	</header>
 
-    <!-- about and skills section -->
-    <section class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-12">
-                <div class="about">
-                    <h2>My menu</h2>
-                    <ul style="list-style-type:none;">
-                        <li><h4>@Html.ActionLink("Albums", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
-                        <hr class="divider">
-                        <li><h4>@Html.ActionLink("Message center", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
-                        <hr class="divider">
-                        @if (ViewBag.LoggedIn && ViewBag.currentUserId == Model.userId)
-                        {
-                            <li>
-                                <h4>
-                                    @Html.ActionLink("Edit your profile", "Edit", "Profile", new { @id = Model.profileID }, null)
-                                </h4>
-                            </li>
-                            <hr class="divider">
-                            <li>
-                                <h4>
-                                    @Html.ActionLink("Friend Requests", "ShowFriendRequests", "Friends", new { @id = Model.userId }, null)
-                                </h4>
-                            </li>
-                        }
-                        <hr class="divider">
-                        <li><h4> @Html.ActionLink("Friends", "ShowFriends", "Friends", new { @id = Model.userId }, null) </h4></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-12">
-                <div class="skills">
-                    <h2>About me</h2>
-                    <p> @Model.about</p>
-                </div>
-            </div>
-        </div>
-    </section>
+	@if (ViewBag.access)
+	{
+		<!-- about and skills section -->
+		<section class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-12">
+					<div class="about">
+						<h2>My menu</h2>
+						<ul style="list-style-type:none;">
+							<li><h4>@Html.ActionLink("Albums", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
+							<hr class="divider">
+							<li><h4>@Html.ActionLink("Message center", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
+							<hr class="divider">
+							@if (ViewBag.LoggedIn && ViewBag.currentUserId == Model.userId)
+							{
+								<li>
+									<h4>
+										@Html.ActionLink("Edit your profile", "Edit", "Profile", new { @id = Model.profileID }, null)
+									</h4>
+								</li>
+								<hr class="divider">
+								<li>
+									<h4>
+										@Html.ActionLink("Friend Requests", "ShowFriendRequests", "Friends", new { @id = Model.userId }, null)
+									</h4>
+								</li>
+								<hr class="divider">
+							}
+							<li><h4> @Html.ActionLink("Friends", "ShowFriends", "Friends", new { @id = Model.userId }, null) </h4></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-8 col-sm-12">
+					<div class="skills">
+						<h2>About me</h2>
+						<p> @Model.about</p>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <!-- education and languages -->
-    <section class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-12">
-                <div class="education">
-                    <h2 class="white">My Studies</h2>
-                    <div class="education-content">
-                        <p>@Model.studies</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 col-sm-12">
-                <div class="languages">
-                    <h2>Known Languages</h2>
-                    <p>@Model.languages</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- contact and work experience -->
-    <section class="container">
-        <div class="row">
-            <div class="col-md-4 col-sm-12">
-                <div class="contact">
-                    <h2>Contact</h2>
-                    <p><i class="glyphicon glyphicon-map-marker"></i> @Model.address</p>
-                    <p><i class="glyphicon glyphicon-earphone"></i> @Model.phone</p>
-                    <p><i class="glyphicon glyphicon-envelope"></i> @Model.email</p>
-                    <p><i class="glyphicon glyphicon-globe"></i> @Model.web</p>
-                </div>
-            </div>
-            <div class="col-md-8 col-sm-12">
-                <div class="experience">
-                    <h2 class="white">Work Experience</h2>
-                    <p>@Model.job </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+		<!-- education and languages -->
+		<section class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-12">
+					<div class="education">
+						<h2 class="white">My Studies</h2>
+						<div class="education-content">
+							<p>@Model.studies</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<div class="languages">
+						<h2>Known Languages</h2>
+						<p>@Model.languages</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- contact and work experience -->
+		<section class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-12">
+					<div class="contact">
+						<h2>Contact</h2>
+						<p><i class="glyphicon glyphicon-map-marker"></i> @Model.address</p>
+						<p><i class="glyphicon glyphicon-earphone"></i> @Model.phone</p>
+						<p><i class="glyphicon glyphicon-envelope"></i> @Model.email</p>
+						<p><i class="glyphicon glyphicon-globe"></i> @Model.web</p>
+					</div>
+				</div>
+				<div class="col-md-8 col-sm-12">
+					<div class="experience">
+						<h2 class="white">Work Experience</h2>
+						<p>@Model.job </p>
+					</div>
+				</div>
+			</div>
+		</section>
+	}
+	else
+	{
+		<section class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12">
+					<div class="education">
+						<h2 class="white">This profile is private!</h2>
+						<h3 class="white">You have to be friends with this person in order to see their profile</h3>
+					</div>
+				</div>
+			</div>
+		</section>
+	}
 </div>

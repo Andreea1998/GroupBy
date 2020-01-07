@@ -34,8 +34,9 @@ namespace Facebook.Controllers
             ViewBag.LoggedIn = false;
 			ViewBag.Administrator = false;
             ViewBag.currentUserId = loggedInUser;
-            //Daca cel ce vizualizeaza profilul nu detine profilul
-            if (loggedInUser != id)
+			ViewBag.access = false;
+			//Daca cel ce vizualizeaza profilul nu detine profilul
+			if (loggedInUser != id)
             {
                 ViewBag.friendRequest = false;
                 int entries = db.Friends.Where(m => (m.requestBy == loggedInUser && m.requestTo == id) || (m.requestBy == id && m.requestTo == loggedInUser)).ToList().Count();
@@ -47,6 +48,7 @@ namespace Facebook.Controllers
                     if (res.friends == true)
                     {
                         ViewBag.friendMsg = "You are friends with this person";
+						ViewBag.access = true;
                     }
                     else
                     {
@@ -62,7 +64,14 @@ namespace Facebook.Controllers
                     }
                 }       
             }
-
+			else
+			{
+				ViewBag.access = true;
+			}
+			if(profile.privateP==false)
+			{
+				ViewBag.access = true;
+			}
 			if (User.IsInRole("User"))
 			{
 				ViewBag.LoggedIn = true;
@@ -176,8 +185,11 @@ namespace Facebook.Controllers
                         profile.phone = requestProfile.phone;
                         profile.email = requestProfile.email;
                         profile.web = requestProfile.web;
+						if (Request["privateP"].ToLower().Contains("true"))
+							profile.privateP = true;
+						else
+							profile.privateP = false;
 
-                        //profile.privateP = requestProfile.privateP;
                         db.SaveChanges();
                         TempData["message"] = "Profilul a fost modificat!";
                     }
