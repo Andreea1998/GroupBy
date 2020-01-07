@@ -45,7 +45,7 @@ namespace Facebook.Controllers
 		{
 			ApplicationUser user = db.Users.Find(id);
 			Album album = new Album();
-			album.user = user;
+			//album.user = user;
 			album.userId = id;
 			return View(album);
 		}
@@ -60,13 +60,15 @@ namespace Facebook.Controllers
 				{
 					db.Albums.Add(album);
 					db.SaveChanges();
-					ApplicationUser user = db.Users.Find(album.user.Id);
+					/*
+					ApplicationUser user = db.Users.Find(album.userId);
 					TempData["message"] = "Albumul a fost creat!";
 					if (TryUpdateModel(user))
 					{
 						user.albums.Add(album);
 						db.SaveChanges();
 					}
+					*/
 					return RedirectToAction("Index", "Album", new { @id = album.userId });
 				}
 				else
