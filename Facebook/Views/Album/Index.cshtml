@@ -31,27 +31,25 @@ else
     </tr>
 
     @foreach (var item in Model)
-	{
-        <tr>
-            <td>
-                @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
-            </td>
+    {
+    <tr>
+        <td>
+            @Html.ActionLink(item.name, "Index", "Photo", new { @id = item.albumID }, null)
+        </td>
 
-            
-            @if (ViewBag.userId == ViewBag.currentUserId||ViewBag.administrator)
+        @if (ViewBag.userId == ViewBag.currentUserId||ViewBag.administrator)
+        {
+        <td>
+           
+            @using (Html.BeginForm("Delete", "Album", new { @id = item.albumID }, FormMethod.Post, null))
             {
-                <td>
-                    @using (Html.BeginForm(actionName: "Edit", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
-                    {
-                        @Html.ActionLink("Edit", "Edit")
-                    }
-                    @using (Html.BeginForm(actionName: "Delete", controllerName: "Album", method: FormMethod.Post, routeValues: new { id = item.albumID }))
-                    {
-                        @Html.ActionLink("Delete", "Delete")
-                    }
-                </td>
+                @Html.HttpMethodOverride(HttpVerbs.Delete);
+                <button class="btn btn-success" type="submit">Delete</button>
             }
-        </tr>
+        </td>
+    
+        }
+    </tr>
     }
 
 </table>

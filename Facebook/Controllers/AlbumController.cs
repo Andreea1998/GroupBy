@@ -141,26 +141,7 @@ namespace Facebook.Controllers
 			}
 		}
 
-		[HttpDelete]
-		//[Authorize(Roles = "Editor,Administrator")]
-		public ActionResult Delete(string id)
-		{
-			Album album = db.Albums.Find(id);
-			//if (album.userId == User.Identity.GetUserId() ||
-			//	User.IsInRole("Administrator"))
-			//
-				db.Albums.Remove(album);
-				db.SaveChanges();
-				TempData["message"] = "Albumul a fost sters!";
-				return RedirectToAction("Index");
-			//}
-			//else
-			//{
-			//	TempData["message"] = "Nu aveti dreptul sa stergeti un album care nu va apartine!";
-			//	return RedirectToAction("Index");
-			//}
-
-		}
+	
 
 	}
 }
