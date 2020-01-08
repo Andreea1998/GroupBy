@@ -46,8 +46,8 @@ namespace Facebook.Models
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<Message> Messages { get; set; }
         public DbSet<Friends> Friends { get; set; }
-
-		protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public DbSet<UserGroup> UserGroups { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

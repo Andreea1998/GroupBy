@@ -186,6 +186,7 @@
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Friends.cs" />
     <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\GroupChat.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Message.cs" />
@@ -193,6 +194,7 @@
     <Compile Include="Models\PhotoWithComments.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Search.cs" />
+    <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -264,12 +266,15 @@
     <Content Include="Views\Album\Edit.cshtml" />
     <Content Include="Views\Friends\ShowFriendRequests.cshtml" />
     <Content Include="Views\Friends\ShowFriends.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Group\New.cshtml" />
+    <Content Include="Views\Group\Show.cshtml" />
+    <Content Include="Views\Group\AddUserIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Views\Comment\" />
-    <Folder Include="Views\Group\" />
     <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>

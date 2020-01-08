@@ -12,6 +12,7 @@ namespace Facebook.Models
 		public int groupID { get; set; }
 		public string name { get; set; }
 
+        public string creatorId { get; set; }
 		public virtual ICollection<ApplicationUser> users { get; set; }
 		public virtual ICollection<Message> messages { get; set; }
 

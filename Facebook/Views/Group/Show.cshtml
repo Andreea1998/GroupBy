@@ -1,0 +1,55 @@
+﻿@model Facebook.Models.GroupChat
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-4 col-sm-12">
+            <ul class="list-group">
+                @foreach (var profile in Model.users)
+                {
+                    <li class="list-group-item">
+                        @Html.ActionLink(profile.name, "Show", "Profile", new { @id = profile.userId }, null);
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="col-md-8 col-sm-12">
+            <ul class="list-group">
+                @foreach (var message in Model.messages)
+                {
+                    <li class="list-group-item">
+                        <p>@message.userName at @message.date</p>
+                        <p>@message.text</p>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</section>
+
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            @using (Html.BeginForm(actionName: "New", controllerName: "Message", method: FormMethod.Post))
+            {
+                @Html.Label("Add new message")
+                @Html.Hidden("userID", (string)ViewBag.currentUser.ToString())
+                @Html.Hidden("groupID", Model.group.groupID);
+                @Html.Hidden("date", System.DateTime.Now);
+                @Html.TextBox("text", null, new { @class = "form-control" })
+                <br />
+                <button class="btn btn-success" type="submit">Add</button>
+            }
+        </div>
+        <div class="col-md-6 col-sm-12">
+            @if (ViewBag.currentUser == Model.group.creatorId)
+            {
+                @Html.ActionLink("Add user to group", "AddUserIndex", "Group", new { @id = Model.group.groupID }, new { @class = "btn btn-success" })
+            }
+        </div>
+    </div>
+</section>

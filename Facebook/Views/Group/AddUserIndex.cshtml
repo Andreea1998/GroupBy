@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Facebook.Models.Profile>
+
+@{
+    ViewBag.Title = "AddUserIndex";
+}
+    <ul>
+        @foreach (var profile in Model)
+        {
+            <li>
+                @Html.ActionLink(profile.name, "Show", "Profile", new { @id = profile.userId }, new { @class = "strong" })
+                <p>@profile.about</p>
+               
+                @Html.ActionLink("Add To Group", "AddToGroup", "Group", new {@groupId = ViewBag.groupId,@userId=profile.userId }, new { @class = "btn btn-success" })
+               
+            </li>
+        }
+    </ul>

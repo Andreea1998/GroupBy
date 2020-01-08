@@ -40,6 +40,11 @@ namespace Facebook
                 "Friends/DeleteFriendRequest/{requestBy}/{requestTo}",
                 new { controller = "Friends", action = "DeleteFriendRequest", requestBy = UrlParameter.Optional, requestTo = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                "AddUserToGroup",
+                "Group/AddToGroup/{groupId}/{userId}",
+                new { controller = "Group", action = "AddToGroup", groupId = UrlParameter.Optional, userId = UrlParameter.Optional }
+            );
 
 
 

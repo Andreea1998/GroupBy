@@ -57,7 +57,7 @@
 						<ul style="list-style-type:none;">
 							<li><h4>@Html.ActionLink("Albums", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
 							<hr class="divider">
-							<li><h4>@Html.ActionLink("Message center", "Index", "Album", new { @id = Model.user.Id }, null)</h4></li>
+							<li><h4>@Html.ActionLink("Message center", "Index", "Group", new { @id = Model.user.Id }, null)</h4></li>
 							<hr class="divider">
 							@if (ViewBag.LoggedIn && ViewBag.currentUserId == Model.userId)
 							{

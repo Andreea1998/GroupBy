@@ -1,0 +1,14 @@
+﻿@model Facebook.Models.Group
+
+@{
+    ViewBag.Title = "New";
+}
+
+@using (Html.BeginForm("New","Group",FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.creatorId);
+    @Html.LabelFor(m => m.name, "Enter a name");
+    @Html.TextBoxFor(m => m.name);
+
+    <input type="submit" value="Submit", class="btn btn-success"/>
+}
