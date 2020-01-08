@@ -1,15 +1,60 @@
 ﻿@model IEnumerable<Facebook.Models.Search>
 
-<ul>
-@foreach(var searchResult in Model)
+<style>
+	.wrap {
+		padding-top: 30px;
+	}
+
+	.glyphicon {
+		
+		margin-right: 10px;
+	}
+
+	small {
+		display: block;
+		color: #888;
+	}
+
+	.well {
+		box-shadow: 2px 5px 4px;
+	}
+	body {
+		background-color: #377DE7;
+	}
+</style>
+
+@foreach (var searchResult in Model)
 {
-	//Should add image too
-	<li>
-	@Html.ActionLink(searchResult.profile.name,"Show", "Profile", new { @id = searchResult.user.Id },null);
-	<p>@searchResult.profile.about</p>
-	</li>
+	<div class="container wrap">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+				<div class="well well-sm">
+					<div class="row">
+						<div class="col-sm-4 col-md-6 col-lg-7">
+							<img src=@searchResult.profile.profileImageUrl alt="" class="img-rounded img-responsive" />
+						</div>
+						<div class="col-sm-8 col-md-6 col-lg-5">
+							<h4>
+								@Html.ActionLink(searchResult.profile.name,"Show","Profile",new {@id=searchResult.profile.userId},null)
+							</h4>
+							<small><cite title=@searchResult.profile.job> <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+							<p>
+								<i class="glyphicon glyphicon-envelope"></i>@searchResult.profile.email
+								<br />
+								<i class="glyphicon glyphicon-globe"></i><a href=@searchResult.profile.web>@searchResult.profile.web</a>
+								<br />
+								<i class="glyphicon glyphicon-gift"></i>@searchResult.profile.about
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 }
-</ul>
 
-
-
+@if(Model.Count()==0)
+{
+	<h2>No results</h2>
+	<h3>Your search dosn't match any profile</h3>
+}
