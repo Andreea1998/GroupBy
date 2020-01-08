@@ -1,10 +1,12 @@
-﻿@model Facebook.Models.Group
+﻿@Styles.Render("~/Content/Group.css")
+
+@model Facebook.Models.Group
 
 @{
     ViewBag.Title = "New";
 }
 
-<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+<div class="font-robo">
     <div class="wrapper wrapper--w680">
         <div class="card card-1">
             <div class="card-body">
@@ -14,8 +16,8 @@
                     @Html.HiddenFor(m => m.creatorId);
                     @Html.LabelFor(m => m.name, "Enter a title for the group");
                     <br>
-                    @Html.TextBoxFor(m => m.name);
-
+                    @Html.TextBoxFor(m => m.name, new { @class = "input--style-1" });
+                    
                     <input type="submit" value="Submit" , class="btn btn-success" />
                 }
             </div>

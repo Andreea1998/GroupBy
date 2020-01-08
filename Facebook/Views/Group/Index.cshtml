@@ -4,23 +4,42 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<style>
+    .wrap {
+        padding-top: 30px;
+    }
 
+    small {
+        display: block;
+        color: #888;
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-          <h3> @item.name </h3>
-        </td>
-        <td>
-            @Html.ActionLink("Enter", "Show","Group", new { @id=item.groupID },null) 
-        </td>
-    </tr>
-}
+    .well {
+        box-shadow: 2px 5px 4px;
+    }
 
+    body {
+        background-color: #377DE7;
+    }
+</style>
+
+<h2>My Groups</h2>
 <div class="container mt-4">
-    <div class="row text-center mt-2">
-        @Html.ActionLink("New Group", "New", "Group", new { @id = ViewBag.groupsOwner }, new { @class = "btn btn-success" })
-    </div>
+    @Html.ActionLink("New Group", "New", "Group", new { @id = ViewBag.groupsOwner }, new { @class = "btn btn-success" })
 </div>
+
+@foreach (var item in Model)
+{
+    <div class="container wrap">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+                <div class="well well-sm">
+                    <h3> @item.name </h3>
+                    <br />
+                    @Html.ActionLink("Enter", "Show", "Group", new { @id = item.groupID }, new { @class = "btn btn-success" })                  
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
