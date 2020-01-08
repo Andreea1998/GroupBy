@@ -4,11 +4,21 @@
     ViewBag.Title = "New";
 }
 
-@using (Html.BeginForm("New","Group",FormMethod.Post))
-{
-    @Html.HiddenFor(m => m.creatorId);
-    @Html.LabelFor(m => m.name, "Enter a name");
-    @Html.TextBoxFor(m => m.name);
+<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+            <div class="card-body">
+                <h2 class="title">Create a New Group</h2>
+                @using (Html.BeginForm("New", "Group", FormMethod.Post))
+                {
+                    @Html.HiddenFor(m => m.creatorId);
+                    @Html.LabelFor(m => m.name, "Enter a title for the group");
+                    <br>
+                    @Html.TextBoxFor(m => m.name);
 
-    <input type="submit" value="Submit", class="btn btn-success"/>
-}
+                    <input type="submit" value="Submit" , class="btn btn-success" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
