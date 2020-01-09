@@ -20,6 +20,10 @@ namespace Facebook.Models
         public string name { get; set; }
         [Required(ErrorMessage = "You must add your description")]
         public string about { get; set; }
+        public string hobbies { get; set; }
+        public string birthdate { get; set; }
+        public string music { get; set; }
+        public string movies { get; set; }
         public string occupation { get; set; }
         public string studies { get; set; }
         public string languages { get; set; }

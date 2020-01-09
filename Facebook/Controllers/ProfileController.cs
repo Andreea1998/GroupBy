@@ -177,6 +177,10 @@ namespace Facebook.Controllers
                         profile.backgroundImageUrl = requestProfile.backgroundImageUrl;
                         profile.name = requestProfile.name;
                         profile.about = requestProfile.about;
+                        profile.hobbies = requestProfile.about;
+                        profile.birthdate = requestProfile.about;
+                        profile.music = requestProfile.about;
+                        profile.movies = requestProfile.about;
                         profile.occupation = requestProfile.occupation;
                         profile.studies = requestProfile.studies;
                         profile.languages = requestProfile.languages;

@@ -1,44 +1,42 @@
 ﻿@model Facebook.Models.PhotoWithComments
+@Styles.Render("~/Content/SmallCSS.css")
 
 @{
-	ViewBag.Title = "Show";
+    ViewBag.Title = "Show";
 }
 
+<section class="container wrap">
+    <ul class="well well-sm list-group">
+        <img class="img-fluid img-thumbnail" src="@Model.photo.photoURL" alt="">
 
-<div>
-	<h4>Photo</h4>
-	<hr />
-	<img class="img-fluid img-thumbnail" src="@Model.photo.photoURL" alt="">
-	@foreach (var comment in Model.comments)
-	{
-		<h3>@comment.userName</h3>
-		<p>@comment.text</p>
+        @foreach (var comment in Model.comments)
+        {
+            <li class="list-group-item">
+                <h3>@comment.userName</h3>
+                <p>@comment.text</p>
 
-		if (ViewBag.currentUser == comment.userID ||ViewBag.administrator)
-		{
+                @if (ViewBag.currentUser == comment.userID || ViewBag.administrator)
+                {
 
-		using (Html.BeginForm("Delete", "Comment", new { commentId = comment.commentID, photoId = comment.photoID }, FormMethod.Post, null))
-		{
-				@Html.HttpMethodOverride(HttpVerbs.Delete);
-				<button class="btn btn-success" type="submit">Delete</button>
-			}
-		}
-	}
-	@if (ViewBag.loggedIn || ViewBag.administrator)
-	{
-		using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
-		{
-			@Html.Label("Add new comment")
-			@Html.Hidden("userID", (string)ViewBag.currentUser.ToString())
-			@Html.Hidden("photoID", Model.photo.photoID)
-			@Html.TextBox("text", null, new { @class = "form-control" })
-			<br />
-			<button class="btn btn-success" type="submit">Add</button>
-		}
-	}
-
-</div>
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+                    using (Html.BeginForm("Delete", "Comment", new { commentId = comment.commentID, photoId = comment.photoID }, FormMethod.Post, null))
+                    {
+                        @Html.HttpMethodOverride(HttpVerbs.Delete);
+                        <button class="btn btn-success" type="submit">Delete</button>
+                    }
+                }
+            </li>
+        }
+        @if (ViewBag.loggedIn || ViewBag.administrator)
+        {
+            using (Html.BeginForm(actionName: "New", controllerName: "Comment", method: FormMethod.Post))
+            {
+                @Html.Label("Add new comment")
+                @Html.Hidden("userID", (string)ViewBag.currentUser.ToString())
+                @Html.Hidden("photoID", Model.photo.photoID)
+                @Html.TextBox("text", null, new { @class = "form-control" })
+                <br />
+                <button class="btn btn-success" type="submit">Add</button>
+            }
+        }
+    </ul>
+</section>

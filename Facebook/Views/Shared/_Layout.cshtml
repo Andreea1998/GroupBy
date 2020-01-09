@@ -12,16 +12,31 @@
 	@Scripts.Render("~/bundles/modernizr")
 	@Scripts.Render("~/bundles/bootstrap")
 
+    <style>
+        .logo{
+            float: left;
+        }
+
+        .navbar-brand{
+            color:white;
+        }
+
+        .navbar-brand:hover {
+            color: white;
+        }
+    </style>
+
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-fixed-top", style="background-color: #0059b3">
 		<div class="container">
-			<div class="navbar-header">
+			<div class="navbar-header col-6 col-md-4">
 				<a class="navbar-brand logo-header" href="#">
-					<img src=@Url.Content("~/Content/Images/logo.png")> 
-				</a>
+					<img src=@Url.Content("~/Content/Images/group.png") width="30" height="30" class="logo"  alt=""> 
+                    GroupBy
+                </a>
 			</div>
-			<div class="col-sm-5 col-md-7">
+			<div class="col-6 col-md-4">
 					@using (Html.BeginForm("Search", "Search", FormMethod.Get,new {@class= "navbar-form" }))
 					{
 						<div class="input-group">
@@ -32,11 +47,11 @@
 						</div>
 					}
 			</div>
-			<div class="navbar-collapse collapse">
+			<div class="col-6 col-md-4">
 				@Html.Partial("_LoginPartial")
 			</div>
 		</div>
-	</div>
+	</nav>
 	<div class="container body-content">
 		@RenderBody()
 	</div>

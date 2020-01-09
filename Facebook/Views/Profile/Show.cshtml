@@ -5,6 +5,14 @@
         background-image: url(@Model.backgroundImageUrl);
         background-size: cover;
     }
+
+    .experience h2{
+        color: #000;
+    }
+
+    .education h2{
+        color: #000;
+    }
 </style>
 
 @{
@@ -88,13 +96,13 @@
                         <h5>Description</h5>
                         <p> @Model.about</p>
                         <h5>Hobbies</h5>
-                        <p>Trekking</p>
+                        <p> @Model.hobbies</p>
                         <h5>Birthdate</h5>
-                        <p>3.12.1998</p>
+                        <p> @Model.birthdate</p>
                         <h5>Prefered music genre</h5>
-                        <p>Jazz</p>
+                        <p> @Model.music</p>
                         <h5>Favourite type of movies</h5>
-                        <p>Drama</p>
+                        <p> @Model.movies</p>
                     </div>
 				</div>
 			</div>
