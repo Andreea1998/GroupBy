@@ -1,19 +1,31 @@
 ﻿@model IEnumerable<Facebook.Models.Profile>
-
+@Styles.Render("~/Content/SMallCSS.css")
 
 @{
     ViewBag.Title = "Friend Request";
 }
 
-
-<ul>
-    @foreach(var profile in Model)
-    {
-    <li>
-        <h2>@profile.name</h2>
-        <p>@profile.about</p>
-        @Html.ActionLink("Accept", "AcceptFriendRequest", "Friends", new { @requestBy = profile.userId, @requestTo = ViewBag.loggedInUser }, new { @class = "btn btn-success" })
-        @Html.ActionLink("Ignore", "DeleteFriendRequest", "Friends", new { @requestBy = profile.userId, @requestTo = ViewBag.loggedInUser }, new { @class = "btn btn-success" })
-    </li>
-    }
-</ul>
+@foreach (var profile in Model)
+{
+    <div class="container wrap">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-4 col-md-6 col-lg-7">
+                            <img src=@profile.profileImageUrl alt="" class="img-rounded img-responsive" />
+                        </div>
+                        <div class="col-sm-8 col-md-6 col-lg-5">
+                            <h4>
+                                @profile.name
+                            </h4>
+                            <p>@profile.about</p>
+                            @Html.ActionLink("Accept", "AcceptFriendRequest", "Friends", new { @requestBy = profile.userId, @requestTo = ViewBag.loggedInUser }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Ignore", "DeleteFriendRequest", "Friends", new { @requestBy = profile.userId, @requestTo = ViewBag.loggedInUser }, new { @class = "btn btn-success" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

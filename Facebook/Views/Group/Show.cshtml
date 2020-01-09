@@ -1,23 +1,30 @@
 ﻿@model Facebook.Models.GroupChat
+@Styles.Render("~/Content/SmallCSS.css")
 
 @{
     ViewBag.Title = "Show";
 }
 
-<section class="container">
+<section class="container wrap">
     <div class="row">
         <div class="col-md-4 col-sm-12">
-            <ul class="list-group">
+            <ul class="well well-sm list-group">
                 @foreach (var profile in Model.users)
                 {
                     <li class="list-group-item">
-                        @Html.ActionLink(profile.name, "Show", "Profile", new { @id = profile.userId }, null);
+                        @Html.ActionLink(profile.name, "Show", "Profile", new { @id = profile.userId }, null)
                     </li>
+                }
+            </ul>
+            <ul class= "well-sm">
+                @if (ViewBag.currentUser == Model.group.creatorId)
+                {
+                    @Html.ActionLink("Add user to group", "AddUserIndex", "Group", new { @id = Model.group.groupID }, new { @class = "btn btn-success" })
                 }
             </ul>
         </div>
         <div class="col-md-8 col-sm-12">
-            <ul class="list-group">
+            <ul class="well well-sm list-group">
                 @foreach (var message in Model.messages)
                 {
                     <li class="list-group-item">
@@ -31,9 +38,9 @@
 </section>
 
 
-<section class="container">
-    <div class="row">
-        <div class="col-md-6 col-sm-12">
+<section class="container wrap">
+    
+        <div>
             @using (Html.BeginForm(actionName: "New", controllerName: "Message", method: FormMethod.Post))
             {
                 @Html.Label("Add new message")
@@ -42,14 +49,8 @@
                 @Html.Hidden("date", System.DateTime.Now);
                 @Html.TextBox("text", null, new { @class = "form-control" })
                 <br />
-                <button class="btn btn-success" type="submit">Add</button>
+                <button class="btn btn-success" type="submit">Add new message</button>
             }
         </div>
-        <div class="col-md-6 col-sm-12">
-            @if (ViewBag.currentUser == Model.group.creatorId)
-            {
-                @Html.ActionLink("Add user to group", "AddUserIndex", "Group", new { @id = Model.group.groupID }, new { @class = "btn btn-success" })
-            }
-        </div>
-    </div>
+        
 </section>

@@ -1,0 +1,20 @@
+﻿.wrap {
+    padding-top: 30px;
+}
+
+.glyphicon {
+    margin-right: 10px;
+}
+
+small {
+    display: block;
+    color: #888;
+}
+
+.well {
+    box-shadow: 2px 5px 4px;
+}
+
+body {
+    background-color: #2c6ed5;
+}

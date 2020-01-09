@@ -15,6 +15,7 @@
 	body {
 		background-color: #377DE7;
 	}
+
 	.btn-margin{
 		margin-left: 10px;
 	}
@@ -34,7 +35,7 @@ else
 @if (ViewBag.userId == ViewBag.currentUserId)
 {
     <p class="text-center">
-        @Html.ActionLink("Create New", "New", "Album", new { @id = ViewBag.userId }, new {@class="btn btn-dark"})
+        @Html.ActionLink("Create New", "New", "Album", new { @id = ViewBag.userId }, new {@class="btn btn-success"})
     </p>
 }
 <div class="row">
@@ -59,7 +60,8 @@ else
 									<div class="bttns-cont" >
 										@if (ViewBag.userId == ViewBag.currentUserId || ViewBag.administrator)
 										{
-											@Html.ActionLink("Edit", "Edit", "Album", new { @id = item.albumID }, new { @class = "btn btn-dark btn-margin" })
+											@Html.ActionLink("Edit", "Edit", "Album", new { @id = item.albumID }, new { @class = "btn btn-success btn-margin" })
+
 											using (Html.BeginForm("Delete", "Album", new { id = item.albumID }, FormMethod.Post, new { @display = "inline" }))
 											{
 												@Html.HttpMethodOverride(HttpVerbs.Delete);
