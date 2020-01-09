@@ -2,6 +2,9 @@
     body {
         background-color: #B7ADCF;
     }
+	.delete-btn{
+		margin: 10px 0px 10px 0px;
+	}
 </style>
 
 @model IEnumerable<Facebook.Models.Photo>
@@ -38,7 +41,16 @@ else
                    <a href="@Url.Action("Show", "Photo", new { @id = item.photoID})" class="d-block mb-4 h-100">
                         <img class="img-fluid img-thumbnail" src="@item.photoURL" alt="">
                    </a>
-              </div>
+				   @if(ViewBag.loggedIn && (ViewBag.ownerUser == ViewBag.currentUser) || ViewBag.administrator)
+				   {
+					   using (Html.BeginForm("Delete", "Photo", new { @id = item.photoID }, FormMethod.Post, null))
+					   {
+						   @Html.HttpMethodOverride(HttpVerbs.Delete)
+						   <button class="btn btn-success delete-btn" type="submit">Delete</button>
+					   }
+				   }
+				  
+              </div> 
           }
     </div>
 

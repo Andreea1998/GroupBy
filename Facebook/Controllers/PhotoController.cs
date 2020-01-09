@@ -34,6 +34,7 @@ namespace Facebook.Controllers
 			ViewBag.currentUser = User.Identity.GetUserId();
 			ViewBag.albumName = album.name;
 			ViewBag.albumId = id;
+
 			return View(photos);
 		}
 
@@ -103,5 +104,21 @@ namespace Facebook.Controllers
 
 			return View(photoWithComments);
 		}
+
+		[HttpDelete]
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Delete(int id)
+		{
+			IEnumerable<Comment> comments = db.Comments.Where(m => m.photoID == id).ToList();
+			foreach(Comment comment in comments)
+			{
+				db.Comments.Remove(comment);
+			}
+			Photo photo = db.Photos.Find(id);
+			db.Photos.Remove(photo);
+			db.SaveChanges();
+			return RedirectToAction("Index", "Photo", new { @id = photo.albumID });
+		}
+
 	}
 }

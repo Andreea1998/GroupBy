@@ -27,6 +27,7 @@ namespace Facebook.Controllers
 			if (User.IsInRole("User"))
 			{
 				ViewBag.loggedIn = true;
+
 			}
 			if (User.IsInRole("Administrator"))
 			{
