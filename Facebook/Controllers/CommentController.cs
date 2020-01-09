@@ -56,5 +56,39 @@ namespace Facebook.Controllers
             db.SaveChanges();
 			return RedirectToAction("Show", "Photo", new { id = photoId});
 		}
-    }
+
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Edit(int id)
+		{
+			Comment comment = db.Comments.Find(id);
+			return View(comment);
+		}
+
+		[HttpPut]
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Edit(Comment reqComment)
+		{
+			try
+			{
+				if(ModelState.IsValid)
+				{
+					Comment comment = db.Comments.Find(reqComment.commentID);
+					if(TryUpdateModel(comment))
+					{
+						comment.text = reqComment.text;
+						db.SaveChanges();
+					}
+					return RedirectToAction("Show", "Photo", new { @id = comment.photoID });
+				}
+				else
+				{
+					return View(reqComment);
+				}
+			}
+			catch(Exception e)
+			{
+				return View(reqComment);
+			}
+		}
+	}
 }

@@ -4,6 +4,15 @@
 @{
     ViewBag.Title = "Show";
 }
+<style>
+	.cont-btns{
+		display:flex;
+		flex-direction:row;
+	}
+	.btn-margin{
+		margin:5px;
+	}
+</style>
 
 <section class="container wrap">
     <ul class="well well-sm list-group">
@@ -17,13 +26,15 @@
 
                 @if (ViewBag.currentUser == comment.userID || ViewBag.administrator)
                 {
-
-                    using (Html.BeginForm("Delete", "Comment", new { commentId = comment.commentID, photoId = comment.photoID }, FormMethod.Post, null))
+					<div class="cont-btns">
+                    @using (Html.BeginForm("Delete", "Comment", new { commentId = comment.commentID, photoId = comment.photoID }, FormMethod.Post, null))
                     {
                         @Html.HttpMethodOverride(HttpVerbs.Delete);
-                        <button class="btn btn-success" type="submit">Delete</button>
+                        <button class="btn btn-success btn-margin" type="submit">Delete</button>
                     }
-                }
+					@Html.ActionLink("Edit","Edit", "Comment", new { @id = comment.commentID }, new { @class="btn btn-success btn-margin", @display="inline"})
+					</div>
+				 }
             </li>
         }
         @if (ViewBag.loggedIn || ViewBag.administrator)

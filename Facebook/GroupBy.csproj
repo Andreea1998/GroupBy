@@ -272,11 +272,11 @@
     <Content Include="Views\Group\New.cshtml" />
     <Content Include="Views\Group\Show.cshtml" />
     <Content Include="Views\Group\AddUserIndex.cshtml" />
+    <Content Include="Views\Comment\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
-    <Folder Include="Views\Comment\" />
     <Folder Include="Views\Message\" />
   </ItemGroup>
   <ItemGroup>

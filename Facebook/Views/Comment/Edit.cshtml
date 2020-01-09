@@ -1,0 +1,47 @@
+﻿@model Facebook.Models.Comment
+@Styles.Render("~/Content/Group.css")
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<div class="font-robo">
+	<div class="wrapper wrapper--w680">
+		<div class="card card-1">
+			<div class="card-body">
+				@using (Html.BeginForm("Edit", "Comment", null, FormMethod.Post))
+				{
+					@Html.HttpMethodOverride(HttpVerbs.Put)
+					@Html.AntiForgeryToken()
+
+					<div class="form-horizontal">
+						<h4>Edit Comment</h4>
+						<hr />
+						@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+						@Html.HiddenFor(model => model.commentID)
+						@Html.HiddenFor(model => model.photoID)
+						@Html.HiddenFor(model => model.userID)
+
+						<div class="form-group">
+							@Html.LabelFor(model => model.text, htmlAttributes: new { @class = "control-label col-md-2" })
+							<div class="col-md-10">
+								@Html.EditorFor(model => model.text, new { htmlAttributes = new { @class = "form-control" } })
+								@Html.ValidationMessageFor(model => model.text, "", new { @class = "text-danger" })
+							</div>
+						</div>
+
+						<div class="form-group">
+							<div class="col-md-offset-2 col-md-10">
+								<input type="submit" value="Save" class="btn btn-success" />
+							</div>
+						</div>
+					</div>
+				}
+
+				<div>
+					@Html.ActionLink("Back to photo", "Show", "Photo", new { @id = Model.photoID }, null)
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
