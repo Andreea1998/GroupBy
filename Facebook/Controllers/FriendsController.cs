@@ -16,8 +16,8 @@ namespace Facebook.Controllers
         {
             return View();
         }
-
-        public ActionResult ShowFriends(string id)
+		
+		public ActionResult ShowFriends(string id)
         {
             IEnumerable<Friends> requests = db.Friends.Where((m => (m.requestBy == id || m.requestTo == id) && (m.friends == true))).ToList();
             List<Profile> friends = new List<Profile>();
@@ -47,7 +47,8 @@ namespace Facebook.Controllers
             return View(friends);
         }
 
-        public ActionResult ShowFriendRequests(string id)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult ShowFriendRequests(string id)
         {
             IEnumerable<Friends> requests = db.Friends.Where(m => m.requestTo==id && m.friends == false).ToList();
             List<Profile> friends = new List<Profile>();
@@ -71,7 +72,8 @@ namespace Facebook.Controllers
         }
 
         [HttpPost]
-        public ActionResult SendFriendRequest(string requestBy,string requestTo)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult SendFriendRequest(string requestBy,string requestTo)
         {
             Friends request = new Friends();
             request.requestBy = requestBy;
@@ -82,7 +84,8 @@ namespace Facebook.Controllers
             return RedirectToAction("Show", "Profile", new { @id = requestTo });
         }
 
-        public ActionResult AcceptFriendRequest(string requestBy, string requestTo)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult AcceptFriendRequest(string requestBy, string requestTo)
         {
             Friends request = db.Friends.Where(m => m.requestBy == requestBy && m.requestTo == requestTo).ToList()[0];
             if(TryUpdateModel(request))
@@ -94,7 +97,8 @@ namespace Facebook.Controllers
             return RedirectToAction("ShowFriendRequests", "Friends", new { @id = requestTo });
         }
 
-        public ActionResult DeleteFriendRequest(string requestBy, string requestTo)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult DeleteFriendRequest(string requestBy, string requestTo)
         {
             Friends request = db.Friends.Where(m => (m.requestBy == requestBy && m.requestTo == requestTo)|| (m.requestBy == requestTo && m.requestTo == requestBy)).ToList()[0];
             db.Friends.Remove(request);

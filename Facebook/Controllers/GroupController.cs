@@ -13,8 +13,9 @@ namespace Facebook.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Group
-        public ActionResult Index(string id)
+		// GET: Group
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Index(string id)
         {
             IEnumerable<UserGroup> userGroups = db.UserGroups.Where(m => m.userId == id).ToList();
             List<Group> groups = new List<Group>();
@@ -28,7 +29,8 @@ namespace Facebook.Controllers
             return View(groups);
         }
 
-        public ActionResult Show(int id)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult Show(int id)
         {
             IEnumerable<UserGroup> userGroups = db.UserGroups.Where(m => m.groupId == id).ToList();
             List<Profile> profiles = new List<Profile>();
@@ -49,7 +51,8 @@ namespace Facebook.Controllers
             return View(groupChat);
         }
 
-        public ActionResult New(string id)
+		[Authorize(Roles = "User,Administrator")]
+		public ActionResult New(string id)
         {
             Group group = new Group();
             group.creatorId = id;
